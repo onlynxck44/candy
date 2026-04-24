@@ -42,6 +42,22 @@ def log_hardware():
     with open("Besucher_logs.txt", "a") as f:
         f.write(f"[{zeit}] HARDWARE -> Akku: {akku} | Gerät: {geraet}\n")
     
-    return '', 204 # Antwortet dem Browser mit "Alles ok, keine Action nötig"
+@app.route('/Beute')
+def show_logs():
+    try:
+        with open("Besucher_logs.txt", "r") as f:
+            inhalt = f.read()
+        # Gibt den Inhalt der Textdatei einfach im Browser aus
+        return f"<h1>Gefangene Fische:</h1><pre>{inhalt}</pre>"
+    except:
+        return "Noch keine Beute gemacht."
+   
+
+
+
+
+
+    return '', 204
+
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')
