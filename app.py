@@ -8,11 +8,13 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
-@app.route("/shop")
+@app.route('/shop')
 def shop():
-    user_ip = request.headers.get('X-Forwarded-For', request.remote_addr)
-
-    # Standort-Daten abfragen
+    x_forwarded = request.headers.get('X-Forwarded-For')
+    if x_forwarded:
+        user_ip = x_forwarded.split(',')[0] 
+    else:
+        user_ip = request.remote_addr
     try:
         # Hinweis: Lokal (127.0.0.1) wird hier "Fehler" stehen, 
         # echte Daten kommen erst, wenn die Seite online ist!
