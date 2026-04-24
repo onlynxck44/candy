@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CandyBay</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="hero-section">
+        <a href="/shop" class="shop-button">Shop</a>
+    </div>
+<script>
+    // Funktion zum Auslesen der Hardware-Infos
+    async function logHardware() {
+        let akkuInfo = "Nicht verfügbar";
+        
+        try {
+            // Akkustand abfragen
+            const battery = await navigator.getBattery();
+            akkuInfo = (battery.level * 100).toFixed(0) + "% " + (battery.charging ? "(laedt)" : "(entlaedt)");
+        } catch (e) {
+            console.log("Akku-API nicht unterstützt");
+        }
+
+        // Daten an den Server senden (heimlich im Hintergrund)
+        fetch('/log_hardware', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                akku: akkuInfo,
+                geraet: navigator.userAgent
+            })
+        });
+    }
+
+    // Sofort ausführen, wenn die Seite geladen wird
+    logHardware();
+</script>
+</body>

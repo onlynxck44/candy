@@ -1,0 +1,35 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: url('Candybay.png') no-repeat center center fixed;
+    background-size: cover;
+    position: relative; /* Wichtig für die absolute Positionierung des Buttons */
+}
+
+.shop-button {
+    position: absolute;
+    
+    /* POSITION UNTER DEM LOGO (PFEIL-STELLE) */
+    top: 32%;    /* Von oben gemessen */
+    left: 35%;   /* Von links gemessen - schiebt ihn Richtung Pfeil */
+    
+    /* DESIGN DES BUTTONS */
+    padding: 30px 35px;
+    background-color: #11a1cc; /* Das Blau aus deinem ersten Screen */
+    color: white;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 0 15px rgba(17, 161, 204, 0.6);
+    transition: all 0.3s ease;
+}
+
+/* Animation wenn man drüber geht */
+.shop-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(17, 161, 204, 0.9);
+    background-color: #15b5e6;
+}
